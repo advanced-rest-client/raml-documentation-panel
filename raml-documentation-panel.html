@@ -69,17 +69,20 @@ Custom property | Description | Default
           <p>Select topic in the selector to see a documentation.</p>
         </div>
         <template is="dom-if" if="[[isMethod]]">
+          <p>TODO: method panel node</p>
           <raml-docs-method-viewer raml="[[selectedObject]]"></raml-docs-method-viewer>
         </template>
         <template is="dom-if" if="[[isResource]]">
+          <p>TODO: resource panel node</p>
           <raml-docs-resource-viewer raml="[[selectedObject]]"></raml-docs-resource-viewer>
         </template>
         <template is="dom-if" if="[[isDocumentation]]">
+          <p>TODO: documentation panel node</p>
           <raml-docs-documentation-viewer raml="[[selectedObject]]"></raml-docs-documentation-viewer>
         </template>
       </section>
     </div>
-    <raml-path-to-object raml="[[raml]]" selected-path="{{selectedPath}}" selected-object="{{selectedObject}}" is-selected-method="{{isMethod}}" is-selected-resource="{{isResource}}" is-selected-documentation="{{isDocumentation}}"></raml-path-to-object>
+    <raml-path-to-object raml="[[raml]]" selected-path="{{selectedPath}}" selected-object="{{selectedObject}}" is-method="{{isMethod}}" is-resource="{{isResource}}" is-documentation="{{isDocumentation}}"></raml-path-to-object>
   </template>
   <script>
   Polymer({
@@ -98,7 +101,7 @@ Custom property | Description | Default
     },
 
     _computeHasSelection: function(isMethod, isResource, isDocumentation) {
-      return !(isMethod || isResource || isDocumentation);
+      return !!(isMethod || isResource || isDocumentation);
     }
   });
   </script>
