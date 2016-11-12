@@ -16,7 +16,8 @@ the License.
 <link rel="import" href="../raml-path-selector/raml-path-selector.html">
 <link rel="import" href="../raml-path-to-object/raml-path-to-object.html">
 <link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
-
+<link rel="import" href="../raml-docs-method-viewer/raml-docs-method-viewer.html">
+<link rel="import" href="../raml-docs-documentation-viewer/raml-docs-documentation-viewer.html">
 <!--
 `<raml-documentation-panel>` A documentation details panel.
 Its purpose is to compute documentation from the RAML file and display the
@@ -54,8 +55,10 @@ Custom property | Description | Default
     }
 
     raml-path-selector {
-      width: 300px;
+      width: 256px;
+      min-width: 256px;
       overflow: auto;
+      margin-right: 8px;
     }
 
     .docs-content {
@@ -69,36 +72,61 @@ Custom property | Description | Default
           <p>Select topic in the selector to see a documentation.</p>
         </div>
         <template is="dom-if" if="[[isMethod]]">
-          <raml-docs-method-viewer raml="[[selectedObject]]"></raml-docs-method-viewer>
+          <raml-docs-method-viewer parent-endpoint="[[selectedParent]]" base-uri="[[raml.baseUri]]" raml="[[selectedObject]]"></raml-docs-method-viewer>
         </template>
         <template is="dom-if" if="[[isResource]]">
           <raml-docs-resource-viewer raml="[[selectedObject]]"></raml-docs-resource-viewer>
         </template>
         <template is="dom-if" if="[[isDocumentation]]">
-          <raml-docs-documentation-viewer raml="[[selectedObject]]"></raml-docs-documentation-viewer>
+          <raml-docs-documentation-viewer documentation="[[selectedObject]]"></raml-docs-documentation-viewer>
         </template>
       </section>
     </div>
-    <raml-path-to-object raml="[[raml]]" selected-path="{{selectedPath}}" selected-object="{{selectedObject}}" is-selected-method="{{isMethod}}" is-selected-resource="{{isResource}}" is-selected-documentation="{{isDocumentation}}"></raml-path-to-object>
+    <raml-path-to-object
+      raml="[[raml]]"
+      selected-path="{{selectedPath}}"
+      selected-object="{{selectedObject}}"
+      selected-parent="{{selectedParent}}"
+      is-method="{{isMethod}}"
+      is-resource="{{isResource}}"
+      is-documentation="{{isDocumentation}}"></raml-path-to-object>
   </template>
   <script>
   Polymer({
     is: 'raml-documentation-panel',
     behaviors: [Polymer.RamlBehavior],
     properties: {
+      // Slected path.
       selectedPath: String,
+      // Selected object in the navigation menu
       selectedObject: Object,
-      isMethod: Boolean,
-      isResource: Boolean,
-      isDocumentation: Boolean,
+      // A parent endpoint of selected method object (if any)
+      selectedParent: Object,
+      // True when current selection is a method
+      isMethod: {
+        type: Boolean,
+        value: false
+      },
+      // True when current selection is a resource
+      isResource: {
+        type: Boolean,
+        value: false
+      },
+      // True when current selection is a documentation node
+      isDocumentation: {
+        type: Boolean,
+        value: false
+      },
+      // True when anything is selected
       hasSelection: {
         type: Boolean,
+        value: false,
         computed: '_computeHasSelection(isMethod,isResource,isDocumentation)'
       }
     },
 
     _computeHasSelection: function(isMethod, isResource, isDocumentation) {
-      return !(isMethod || isResource || isDocumentation);
+      return !!(isMethod || isResource || isDocumentation);
     }
   });
   </script>

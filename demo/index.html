@@ -21,7 +21,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <link rel="import" href="../raml-documentation-panel.html">
   <style is="custom-style" include="demo-pages-shared-styles">
   .vertical-section-container {
-    max-width: 600px;
+    max-width: 1000px;
   }
   </style>
 </head>
@@ -31,7 +31,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <div class="vertical-section-container centered">
       <raml-docs-parser raml="{{raml}}"></raml-docs-parser>
       <h3>The `raml-documentation-panel`</h3>
-      <raml-documentation-panel raml="{{raml}}"></raml-documentation-panel>
+      <raml-documentation-panel raml="{{raml.specification}}"></raml-documentation-panel>
     </div>
   </template>
 </body>
