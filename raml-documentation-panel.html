@@ -75,6 +75,7 @@ Custom property | Description | Default
           <raml-docs-method-viewer parent-endpoint="[[selectedParent]]" base-uri="[[raml.baseUri]]" raml="[[selectedObject]]"></raml-docs-method-viewer>
         </template>
         <template is="dom-if" if="[[isResource]]">
+          <p>TODO: resource panel node</p>
           <raml-docs-resource-viewer raml="[[selectedObject]]"></raml-docs-resource-viewer>
         </template>
         <template is="dom-if" if="[[isDocumentation]]">
