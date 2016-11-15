@@ -1,6 +1,6 @@
 {
   "name": "raml-documentation-panel",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "license": "Apache-2.0 OR CC-BY-4.0",
   "description": "A documentation details panel. Its purpose is to compute documentation from the RAML file and display the result as a main documentation panel",
   "devDependencies": {
