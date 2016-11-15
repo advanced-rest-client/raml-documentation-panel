@@ -18,6 +18,8 @@ the License.
 <link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../raml-docs-method-viewer/raml-docs-method-viewer.html">
 <link rel="import" href="../raml-docs-documentation-viewer/raml-docs-documentation-viewer.html">
+<link rel="import" href="../raml-docs-resource-viewer/raml-docs-resource-viewer.html">
+
 <!--
 `<raml-documentation-panel>` A documentation details panel.
 Its purpose is to compute documentation from the RAML file and display the
@@ -32,12 +34,20 @@ or
 document.querySelector('raml-documentation-panel').raml = raml;
 ```
 
+Note: If you are using `raml-js-parser` element, remember that the Api object must be transformed
+to JSON and returned object's `specification` property is what this element accepts.
+
+Note: This element (actually `raml-path-to-object`) will chnage the strucure of the `raml` property.
+It's due to internal optymisation when computing required definitions.
+
 ### Styling
 `<raml-documentation-panel>` provides the following custom properties and mixins for styling:
 
 Custom property | Description | Default
 ----------------|-------------|----------
 `--raml-documentation-panel` | Mixin applied to the element | `{}`
+`--raml-docs-path-selector-width` | Width of the path selector. It is applied to both `width` and `min-width` properties | `256px`
+`--raml-docs-main-content` | Mixin applied to the main docs content (where the docs content is displayed). | `{}`
 
 @group RAML Elements
 @element raml-documentation-panel
@@ -48,6 +58,7 @@ Custom property | Description | Default
     <style>
     :host {
       display: block;
+      @apply(raml-documentation-panel);
     }
 
     .content {
@@ -55,14 +66,15 @@ Custom property | Description | Default
     }
 
     raml-path-selector {
-      width: 256px;
-      min-width: 256px;
+      width: var(--raml-docs-path-selector-width, 256px);
+      min-width: var(--raml-docs-path-selector-width, 256px);
       overflow: auto;
       margin-right: 8px;
     }
 
     .docs-content {
       @apply(--layout-flex);
+      @aaply(--raml-docs-main-content);
     }
     </style>
     <div class="content">
@@ -75,7 +87,7 @@ Custom property | Description | Default
           <raml-docs-method-viewer parent-endpoint="[[selectedParent]]" base-uri="[[raml.baseUri]]" raml="[[selectedObject]]"></raml-docs-method-viewer>
         </template>
         <template is="dom-if" if="[[isResource]]">
-          <raml-docs-resource-viewer raml="[[selectedObject]]"></raml-docs-resource-viewer>
+          <raml-docs-resource-viewer raml="[[selectedObject]]" current-path="{{selectedPath}}"></raml-docs-resource-viewer>
         </template>
         <template is="dom-if" if="[[isDocumentation]]">
           <raml-docs-documentation-viewer documentation="[[selectedObject]]"></raml-docs-documentation-viewer>
