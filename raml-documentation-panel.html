@@ -69,13 +69,12 @@ Custom property | Description | Default
       <raml-path-selector raml="[[raml]]" selected-path="{{selectedPath}}"></raml-path-selector>
       <section class="docs-content">
         <div class="no-selection" hidden$="[[hasSelection]]">
-          <p>Select topic in the selector to see a documentation.</p>
+          <p>Select topic in the selector to see the documentation.</p>
         </div>
         <template is="dom-if" if="[[isMethod]]">
           <raml-docs-method-viewer parent-endpoint="[[selectedParent]]" base-uri="[[raml.baseUri]]" raml="[[selectedObject]]"></raml-docs-method-viewer>
         </template>
         <template is="dom-if" if="[[isResource]]">
-          <p>TODO: resource panel node</p>
           <raml-docs-resource-viewer raml="[[selectedObject]]"></raml-docs-resource-viewer>
         </template>
         <template is="dom-if" if="[[isDocumentation]]">
