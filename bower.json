@@ -28,7 +28,8 @@
     "raml-docs-method-viewer": "advanced-rest-client/raml-docs-method-viewer#^1.0.1",
     "raml-docs-resource-viewer": "advanced-rest-client/raml-docs-resource-viewer#^1.0.1",
     "raml-docs-response-panel": "advanced-rest-client/raml-docs-response-panel#^1.0.1",
-    "raml-docs-documentation-viewer": "advanced-rest-client/raml-docs-documentation-viewer#^1.0.1"
+    "raml-docs-documentation-viewer": "advanced-rest-client/raml-docs-documentation-viewer#^1.0.1",
+    "raml-aware": "advanced-rest-client/raml-aware#^1.0.2"
   },
   "devDependencies": {
     "iron-component-page": "polymerelements/iron-component-page#1.0.0",
