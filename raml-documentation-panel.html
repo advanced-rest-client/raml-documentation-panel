@@ -19,7 +19,7 @@ the License.
 <link rel="import" href="../raml-docs-method-viewer/raml-docs-method-viewer.html">
 <link rel="import" href="../raml-docs-documentation-viewer/raml-docs-documentation-viewer.html">
 <link rel="import" href="../raml-docs-resource-viewer/raml-docs-resource-viewer.html">
-
+<link rel="import" href="../raml-aware/raml-aware.html">
 <!--
 `<raml-documentation-panel>` A documentation details panel.
 Its purpose is to compute documentation from the RAML file and display the
@@ -48,6 +48,7 @@ Custom property | Description | Default
 `--raml-documentation-panel` | Mixin applied to the element | `{}`
 `--raml-docs-path-selector-width` | Width of the path selector. It is applied to both `width` and `min-width` properties | `256px`
 `--raml-docs-main-content` | Mixin applied to the main docs content (where the docs content is displayed). | `{}`
+`--raml-docs-main-content-width` | Max width of the documentation panel. Is fould be used to avoid usability issues for reading long texts. | `700px`
 
 @group RAML Elements
 @element raml-documentation-panel
@@ -73,6 +74,7 @@ Custom property | Description | Default
     }
 
     .docs-content {
+      max-width: var(--raml-docs-main-content-width, 700px);
       @apply(--layout-flex);
       @aaply(--raml-docs-main-content);
     }
@@ -102,6 +104,9 @@ Custom property | Description | Default
       is-method="{{isMethod}}"
       is-resource="{{isResource}}"
       is-documentation="{{isDocumentation}}"></raml-path-to-object>
+    <template is="dom-if" if="[[aware]]" restamp="true">
+      <raml-aware raml="{{raml}}" scope="[[aware]]"></raml-aware>
+    </template>
   </template>
   <script>
   Polymer({
@@ -134,7 +139,9 @@ Custom property | Description | Default
         type: Boolean,
         value: false,
         computed: '_computeHasSelection(isMethod,isResource,isDocumentation)'
-      }
+      },
+      // Name of the `<raml-aware>` scope, it will update the `raml` property.
+      aware: String
     },
 
     _computeHasSelection: function(isMethod, isResource, isDocumentation) {
