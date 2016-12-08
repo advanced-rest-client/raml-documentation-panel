@@ -114,7 +114,10 @@ Custom property | Description | Default
     behaviors: [Polymer.RamlBehavior],
     properties: {
       // Slected path.
-      selectedPath: String,
+      selectedPath: {
+        type: String,
+        notify: true
+      },
       // Selected object in the navigation menu
       selectedObject: Object,
       // A parent endpoint of selected method object (if any)
@@ -122,23 +125,27 @@ Custom property | Description | Default
       // True when current selection is a method
       isMethod: {
         type: Boolean,
-        value: false
+        value: false,
+        notify: true
       },
       // True when current selection is a resource
       isResource: {
         type: Boolean,
-        value: false
+        value: false,
+        notify: true
       },
       // True when current selection is a documentation node
       isDocumentation: {
         type: Boolean,
-        value: false
+        value: false,
+        notify: true
       },
       // True when anything is selected
       hasSelection: {
         type: Boolean,
         value: false,
-        computed: '_computeHasSelection(isMethod,isResource,isDocumentation)'
+        computed: '_computeHasSelection(isMethod,isResource,isDocumentation)',
+        notify: true
       },
       // Name of the `<raml-aware>` scope, it will update the `raml` property.
       aware: String

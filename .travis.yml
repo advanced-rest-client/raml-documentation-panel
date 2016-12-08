@@ -3,19 +3,25 @@ sudo: required
 dist: trusty
 node_js: stable
 before_script:
-- npm install -g bower polylint web-component-tester
-- bower install
+- npm install --silent bower polymer-cli
+- "./node_modules/.bin/bower install --silent"
 addons:
-  firefox: '46.0'
-  apt:
-    sources:
-    - google-chrome
-    packages:
-    - google-chrome-stable
   sauce_connect: true
 script:
-- polylint
-- xvfb-run wct
+- "./node_modules/.bin/polymer lint raml-documentation-panel.html"
+- ./node_modules/.bin/polymer test --plugin sauce --job-name "raml-documentation-panel:${TRAVIS_BRANCH}"
+  --build-number=${TRAVIS_BUILD_NUMBER}
 cache:
   directories:
   - bower_components
+  - node_modules
+branches:
+  only:
+  - stage
+  - develop
+after_success:
+- node tasks/ci.js
+env:
+  global:
+  - secure: wz4y3EQD/rMJSBLUvXpKw9BR8Qc9KSU8PfRbKub7Adokhqh4CT812LkH+wGKlq4/h/BihpMUV2p8d8eu6LDSbnZ6Gb+Z+CeKNLdEjUXlYfpWqLrIcRXui8uQXcHbv4YMGr6NfKQfnQ9tiF7mV0ITqnbNUffHErZ9OND0UzwUWxvG7gfL/NO/i0RztJZUCMiC8U3/nTSpGTJ2iDFJtBECRKZ2s95hdplzOxN34OdpWMCr+X9owwS9dKHcYFmDcR4U7KJXLnPxoZdF/DJwsTz1pIcJ0OAHhH6jowgKgpE0/19ZcTltM4IKHUbMlgemONvkCcIDzVbWCygSwRTD4BFoqTjunSIZK0+2brNm10AhA50kwURM5SJHPJ25xVPIpssOfq/Zx8uNVgxhUXFp2idlGBiKBS7hnMuyb5MNF9m6fKZV7a4RxTPhyITtt068pVI0lK62Fj0sBgkoZLdyVVVv8w7I3ZwJ4oBp76MMOKn5uHXh4186tUSIGHvkC3WkCSKNS/BNtKGVZDyEdTGAI7EUU5JiIrq4kHCgKFwdWYFrmDW4inR0a/zl1oK78g/XpMI1lB0/HYabCG2HQzwzPSvpzkwM4dVKsPsMZGhV1q3mstnnn//E+oB6D99mRAq+oXutNh2byLqv0lohQdBAZuK6ABJzIhgq5vKc+2zTUSklaao=
+  - secure: SWfRMw2oRbWG8M+7AOsLVmad3ThdGhAFHMSUULTZYE5Tew61mAubeQ8FGyAaVv/+BAMEhgogtTm9hCBW3UmLcwM78zRo7Z9wIBLh/4TjUHsWojDk17jkdlH8/wLfZCPMH5bq96ym5cpx2xsRipmY5P8zzdpXetdoSSJuiNbJZgjH2A4sKMWO/udlIMAdi8fI+JijmjeKjE7DB03pMk9KKleoaeY8TJNyByjDpBb+TnpX86QYLGelw2nFKIfKo0QOjNOpTZ/taSu5gqKIcXnzvDrGZU+0rp/oWVqg/hTiiJOMRWoV5bYFpjuq83nc9urna9nts6VOmzFgzlNUDWKix0Vpqg8kxNaO7tDX7+JwJMVJKsP6GkB6aKugK9fIB/oFp1wSi3EOb7sjYnJZBIrjFLw7kFr/7JssE9vZdsbShyXsdXQya93tvzGJtVYGafFF9/95+LCwKvkOkdiR+GQk9WeLpivE5WFGF4Tbgv923GfQ0fQH7PFKELqGd8phOMdSVnFEaBA1CYHxhugvdjNirYVDWK9Ac0fynDdJdUdcL/uWK6+oD4C9lmmamZVI/MoE15N3SnjoicOQRpJVQ8n/+qXTW9gCaOmozJwvjusFu+gputFBU9aJWut9SMIyLi8ZIwi+M9h8GcVMPpd83rHtwx+W5+igWgjHJv/Jtj1IDhw=
