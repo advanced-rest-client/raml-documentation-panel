@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/advanced-rest-client/raml-documentation-panel.svg?branch=master)](https://travis-ci.org/advanced-rest-client/raml-documentation-panel)  
+
+# raml-documentation-panel
 
 `<raml-documentation-panel>` A documentation details panel.
 Its purpose is to compute documentation from the RAML file and display the

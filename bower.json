@@ -25,7 +25,7 @@
     "raml-path-selector": "advanced-rest-client/raml-path-selector#^1.0.0",
     "raml-path-to-object": "advanced-rest-client/raml-path-to-object#^1.0.0",
     "iron-flex-layout": "PolymerElements/iron-flex-layout#^1.3.1",
-    "raml-docs-method-viewer": "advanced-rest-client/raml-docs-method-viewer#^0.1.3",
+    "raml-docs-method-viewer": "advanced-rest-client/raml-docs-method-viewer#^0.1.4",
     "raml-docs-resource-viewer": "advanced-rest-client/raml-docs-resource-viewer#^1.0.1",
     "raml-docs-response-panel": "advanced-rest-client/raml-docs-response-panel#^1.0.1",
     "raml-docs-documentation-viewer": "advanced-rest-client/raml-docs-documentation-viewer#^1.0.1",
@@ -51,5 +51,5 @@
     "test",
     "tasks"
   ],
-  "version": "1.0.2"
+  "version": "1.0.4"
 }
