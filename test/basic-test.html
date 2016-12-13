@@ -17,9 +17,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <script src="../../web-component-tester/browser.js"></script>
     <script src="../../iron-test-helpers/test-helpers.js"></script>
     <script src="../../iron-test-helpers/mock-interactions.js"></script>
-
+    <script src="raml.js"></script>
     <!-- Step 1: import the element to test -->
     <link rel="import" href="../raml-documentation-panel.html">
+
   </head>
   <body>
 
@@ -30,12 +31,102 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </test-fixture>
 
     <script>
-    /* global suite, test, fixture, assert */
+    /* global suite, test, fixture, assert, forceXIfStamp, RAML_TEST */
     suite('basic', function() {
-      test('`raml-documentation-panel` should be initialized', function() {
-        var element = fixture('basic');
-        assert.equal(element.isAttached, true, 'element.isAttached equals true');
+      var element;
+      setup(function() {
+        element = fixture('basic');
       });
+      test('The selectedPath is empty when initialized', function() {
+        forceXIfStamp(element);
+        assert.notOk(element.selectedPath);
+      });
+
+      test('The hasSelection is false', function() {
+        forceXIfStamp(element);
+        assert.equal(element.hasSelection, false);
+      });
+
+      test('The selectedObject is undefined', function() {
+        forceXIfStamp(element);
+        assert.equal(element.selectedObject, undefined);
+      });
+      test('The selectedParent is undefined', function() {
+        forceXIfStamp(element);
+        assert.equal(element.selectedParent, undefined);
+      });
+      test('The only isDocumentation is false', function() {
+        assert.equal(element.isDocumentation, false);
+      });
+      test('The only isResource is false', function() {
+        assert.equal(element.isResource, false);
+      });
+      test('The only isMethod is false', function() {
+        assert.equal(element.isMethod, false);
+      });
+    });
+
+    suite('with data', function() {
+      var element;
+      setup(function() {
+        element = fixture('basic');
+        element.raml = RAML_TEST;
+        forceXIfStamp(element);
+      });
+
+      test('The selectedPath is set to docs after RAML change', function() {
+        forceXIfStamp(element);
+        assert.equal(element.selectedPath, 'documentation.0');
+      });
+
+      test('The selectedPath is set to resource after RAML change', function() {
+        element.raml = {
+          resources: [{}]
+        };
+        forceXIfStamp(element);
+        assert.equal(element.selectedPath, 'resources.0');
+      });
+
+      test('The hasSelection is true when path is selected', function() {
+        assert.equal(element.hasSelection, true);
+      });
+
+      test('The selectedObject is set', function() {
+        assert.notEqual(element.selectedObject, undefined);
+      });
+      test('The selectedParent is undefined with documentation selected', function() {
+        assert.equal(element.selectedParent, undefined);
+      });
+      test('Only the isDocumentation is true', function() {
+        assert.equal(element.isDocumentation, true);
+        assert.equal(element.isResource, false);
+        assert.equal(element.isMethod, false);
+      });
+
+      test('Only the isResource is true', function() {
+        element.selectedPath = 'resources.0';
+        assert.equal(element.isDocumentation, false);
+        assert.equal(element.isResource, true);
+        assert.equal(element.isMethod, false);
+      });
+
+      test('Only the isMethod is true', function() {
+        element.selectedPath = 'resources.0.methods.0';
+        assert.equal(element.isDocumentation, false);
+        assert.equal(element.isResource, false);
+        assert.equal(element.isMethod, true);
+      });
+
+      test('The selectedParent is set with method selected', function() {
+        element.selectedPath = 'resources.0.methods.0';
+        assert.notEqual(element.selectedParent, undefined);
+      });
+
+      test('The selectedParent is undefined with resource selected', function() {
+        element.selectedPath = 'resources.0';
+        assert.equal(element.selectedParent, undefined);
+      });
+
     });
     </script>
 

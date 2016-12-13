@@ -1,6 +1,6 @@
 {
-  "esnext": true,
-  "node": true,
+  "esnext": false,
+  "node": false,
   "browser": true,
   "bitwise": false,
   "camelcase": false,
@@ -14,9 +14,8 @@
   "undef": true,
   "unused": true,
   "newcap": false,
+  "mocha": true,
   "globals": {
-    "Polymer": true,
-    "fetch": true,
-    "Headers": true
+    "Polymer": true
   }
 }
