@@ -16,23 +16,32 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
   <title>raml-documentation-panel demo</title>
   <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
-  <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
-  <link rel="import" href="../../raml-docs-helpers/raml-docs-parser.html">
+  <link rel="import" href="../../arc-demo-helpers/raml-demo-page.html">
+  <link rel="import" href="../../font-roboto/roboto.html">
   <link rel="import" href="../raml-documentation-panel.html">
-  <style is="custom-style" include="demo-pages-shared-styles">
-  .vertical-section-container {
-    max-width: 1000px;
+  <style>
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', 'Noto', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
   }
   </style>
 </head>
 
 <body unresolved>
   <template is="dom-bind" id="app">
-    <div class="vertical-section-container centered">
-      <raml-docs-parser raml="{{raml}}"></raml-docs-parser>
-      <h3>The `raml-documentation-panel`</h3>
-      <raml-documentation-panel raml="{{raml.specification}}"></raml-documentation-panel>
-    </div>
+    <raml-demo-page raml="{{raml}}" no-selector narrow="{{narrow}}">
+      <h1>The raml-documentation-panel element</h1>
+      <div main>
+        <raml-documentation-panel raml="{{raml}}" auto-hide narrow="{{narrow}}"></raml-documentation-panel>
+      </div>
+    </raml-demo-page>
   </template>
 </body>
 
