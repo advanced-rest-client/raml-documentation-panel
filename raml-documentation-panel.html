@@ -186,9 +186,11 @@ Custom property | Description | Default
       }
     },
 
+    // Computes a boolean value if the user selected anything in the path selector.
     _computeHasSelection: function(isMethod, isResource, isDocumentation) {
       return !!(isMethod || isResource || isDocumentation);
     },
+
     // Resets the path then the RAML object change
     _ramlChanged: function(raml) {
       if (!raml) {
