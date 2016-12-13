@@ -18,6 +18,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
   <link rel="import" href="../../arc-demo-helpers/raml-demo-page.html">
   <link rel="import" href="../../font-roboto/roboto.html">
+  <link rel="import" href="../../paper-toast/paper-toast.html">
+
   <link rel="import" href="../raml-documentation-panel.html">
   <style>
   html,
@@ -31,18 +33,41 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     font-weight: 400;
     line-height: 20px;
   }
+
+  h1.main-title {
+    white-space: pre-line !important;
+    word-break: break-all;
+  }
   </style>
 </head>
 
 <body unresolved>
   <template is="dom-bind" id="app">
-    <raml-demo-page raml="{{raml}}" no-selector narrow="{{narrow}}">
-      <h1>The raml-documentation-panel element</h1>
+    <raml-demo-page raml="{{raml}}" no-selector narrow="{{forceNarrow}}">
+      <h1 class="main-title">The raml-documentation-panel element</h1>
       <div main>
-        <raml-documentation-panel raml="{{raml}}" auto-hide narrow="{{narrow}}"></raml-documentation-panel>
+        <raml-documentation-panel raml="{{raml}}" auto-hide narrow="{{narrow}}" on-tryit-requested="_tryit"></raml-documentation-panel>
       </div>
     </raml-demo-page>
+    <paper-toast opened="{{toastOpened}}" text="The request panel has been requested"></paper-toast>
   </template>
+  <script>
+  (function(app) {
+    app.toastOpened = false;
+    app.forceNarrow = false;
+    app.observers = ['_forceNarrowChanged(forceNarrow)'];
+    app._tryit = function() {
+      app.toastOpened = true;
+    };
+    app._forceNarrowChanged = function(forceNarrow) {
+      if (!app._forceInitialTrigger) {
+        app._forceInitialTrigger = true;
+        return;
+      }
+      app.narrow = forceNarrow;
+    };
+  })(document.querySelector('#app'));
+  </script>
 </body>
 
 </html>

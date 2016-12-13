@@ -29,7 +29,8 @@
     "raml-docs-resource-viewer": "advanced-rest-client/raml-docs-resource-viewer#^1.0.1",
     "raml-docs-response-panel": "advanced-rest-client/raml-docs-response-panel#^1.0.1",
     "raml-docs-documentation-viewer": "advanced-rest-client/raml-docs-documentation-viewer#^1.0.1",
-    "raml-aware": "advanced-rest-client/raml-aware#^1.0.2"
+    "raml-aware": "advanced-rest-client/raml-aware#^1.0.2",
+    "iron-media-query": "PolymerElements/iron-media-query#^1.0.8"
   },
   "devDependencies": {
     "iron-component-page": "polymerelements/iron-component-page#1.0.0",
@@ -39,7 +40,8 @@
     "iron-test-helpers": "PolymerElements/iron-test-helpers#^1.0.0",
     "test-fixture": "PolymerElements/test-fixture#^1.0.0",
     "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0",
-    "arc-demo-helpers": "advanced-rest-client/arc-demo-helpers#^1.0.5"
+    "arc-demo-helpers": "advanced-rest-client/arc-demo-helpers#^1.0.5",
+    "paper-toast": "PolymerElements/paper-toast#^1.3.0"
   },
   "ignore": [
     "**/.*",

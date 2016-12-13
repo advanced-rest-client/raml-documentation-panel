@@ -20,6 +20,7 @@ the License.
 <link rel="import" href="../raml-docs-documentation-viewer/raml-docs-documentation-viewer.html">
 <link rel="import" href="../raml-docs-resource-viewer/raml-docs-resource-viewer.html">
 <link rel="import" href="../raml-aware/raml-aware.html">
+<link rel="import" href="../iron-media-query/iron-media-query.html">
 <!--
 `<raml-documentation-panel>` A documentation details panel.
 Its purpose is to compute documentation from the RAML file and display the
@@ -48,7 +49,8 @@ Custom property | Description | Default
 `--raml-documentation-panel` | Mixin applied to the element | `{}`
 `--raml-docs-path-selector-width` | Width of the path selector. It is applied to both `width` and `min-width` properties | `256px`
 `--raml-docs-main-content` | Mixin applied to the main docs content (where the docs content is displayed). | `{}`
-`--raml-docs-main-content-width` | Max width of the documentation panel. Is fould be used to avoid usability issues for reading long texts. | `700px`
+`--raml-docs-main-content-width` | Max width of the documentation panel. Additional space is required for innner panels navigation | `900px`
+`--raml-docs-documentation-width` | Width of the documentation panel. It should be used to avoid usability issues for reading long texts. | `700px`
 
 @group RAML Elements
 @element raml-documentation-panel
@@ -66,6 +68,10 @@ Custom property | Description | Default
       @apply(--layout-horizontal);
     }
 
+    :host([narrow]) .content {
+      @apply(--layout-vertical);
+    }
+
     raml-path-selector {
       width: var(--raml-docs-path-selector-width, 256px);
       min-width: var(--raml-docs-path-selector-width, 256px);
@@ -73,26 +79,38 @@ Custom property | Description | Default
       margin-right: 8px;
     }
 
+    :host([narrow]) raml-path-selector {
+      width: auto;
+      min-width: 1px;
+    }
+
     .docs-content {
-      max-width: var(--raml-docs-main-content-width, 700px);
+      max-width: var(--raml-docs-main-content-width, 900px);
       @apply(--layout-flex);
       @aaply(--raml-docs-main-content);
+
     }
+
+    .docs-content raml-docs-documentation-viewer {
+      max-width: var(--raml-docs-documentation-width, 700px);
+    }
+
     </style>
+    <iron-media-query query="(max-width: [[narrowWidth]])" query-matches="{{narrow}}"></iron-media-query>
     <div class="content">
-      <raml-path-selector raml="[[raml]]" selected-path="{{selectedPath}}"></raml-path-selector>
+      <raml-path-selector raml="[[raml]]" selected-path="{{selectedPath}}" narrow="[[narrow]]"></raml-path-selector>
       <section class="docs-content">
         <div class="no-selection" hidden$="[[hasSelection]]">
-          <p>Select topic in the selector to see the documentation.</p>
+          <p>Select topic in the RAML selector to see the documentation.</p>
         </div>
         <template is="dom-if" if="[[isMethod]]">
-          <raml-docs-method-viewer parent-endpoint="[[selectedParent]]" base-uri="[[raml.baseUri]]" raml="[[selectedObject]]"></raml-docs-method-viewer>
+          <raml-docs-method-viewer parent-endpoint="[[selectedParent]]" base-uri="[[raml.baseUri]]" raml="[[selectedObject]]" narrow="[[narrow]]"></raml-docs-method-viewer>
         </template>
         <template is="dom-if" if="[[isResource]]">
-          <raml-docs-resource-viewer raml="[[selectedObject]]" current-path="{{selectedPath}}"></raml-docs-resource-viewer>
+          <raml-docs-resource-viewer raml="[[selectedObject]]" current-path="{{selectedPath}}" narrow="[[narrow]]"></raml-docs-resource-viewer>
         </template>
         <template is="dom-if" if="[[isDocumentation]]">
-          <raml-docs-documentation-viewer documentation="[[selectedObject]]"></raml-docs-documentation-viewer>
+          <raml-docs-documentation-viewer documentation="[[selectedObject]]" narrow="[[narrow]]"></raml-docs-documentation-viewer>
         </template>
       </section>
     </div>
@@ -113,6 +131,10 @@ Custom property | Description | Default
     is: 'raml-documentation-panel',
     behaviors: [Polymer.RamlBehavior],
     properties: {
+      raml: {
+        type: Object,
+        observer: '_ramlChanged'
+      },
       // Slected path.
       selectedPath: {
         type: String,
@@ -148,11 +170,36 @@ Custom property | Description | Default
         notify: true
       },
       // Name of the `<raml-aware>` scope, it will update the `raml` property.
-      aware: String
+      aware: String,
+      /**
+       * If set it will renders the view in the narrow layout.
+       */
+      narrow: {
+        type: Boolean,
+        notify: true,
+        reflectToAttribute: true
+      },
+      // A widith below which the `narrow` property will be set to true.
+      narrowWidth: {
+        type: String,
+        value: '768px'
+      }
     },
 
     _computeHasSelection: function(isMethod, isResource, isDocumentation) {
       return !!(isMethod || isResource || isDocumentation);
+    },
+    // Resets the path then the RAML object change
+    _ramlChanged: function(raml) {
+      if (!raml) {
+        return this.set('selectedPath', '');
+      }
+      if (raml.documentation && raml.documentation.length) {
+        return this.set('selectedPath', 'documentation.0');
+      }
+      if (raml.resources && raml.resources.length) {
+        return this.set('selectedPath', 'resources.0');
+      }
     }
   });
   </script>
