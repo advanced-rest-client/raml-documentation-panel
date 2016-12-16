@@ -1,3 +1,26 @@
+<a name="1.0.5"></a>
+## [1.0.5](https://github.com/advanced-rest-client/raml-documentation-panel/compare/1.0.4...v1.0.5) (2016-12-16)
+
+
+### Docs
+
+* Updated documentation for method ([f100692ced60e47ac1256187bc171314912a74fe](https://github.com/advanced-rest-client/raml-documentation-panel/commit/f100692ced60e47ac1256187bc171314912a74fe))
+
+### Fix
+
+* Fixed styles definitions ([a5a788d0fceebd8307f14b4a1a30dfdf3547890c](https://github.com/advanced-rest-client/raml-documentation-panel/commit/a5a788d0fceebd8307f14b4a1a30dfdf3547890c))
+
+### New
+
+* Added media queries and movile view ([6d95d14ef35e3e7fc8cb105d87b65e73fd07426b](https://github.com/advanced-rest-client/raml-documentation-panel/commit/6d95d14ef35e3e7fc8cb105d87b65e73fd07426b))
+* Added test cases ([5f3edcab61c0bd819bbf7a13c6231f3da448bb4b](https://github.com/advanced-rest-client/raml-documentation-panel/commit/5f3edcab61c0bd819bbf7a13c6231f3da448bb4b))
+
+### Update
+
+* Updated demo page ([7d31de03722aed79ad799752b96bcadd43c9fb37](https://github.com/advanced-rest-client/raml-documentation-panel/commit/7d31de03722aed79ad799752b96bcadd43c9fb37))
+
+
+
 <a name="1.0.4"></a>
 ## [1.0.4](https://github.com/advanced-rest-client/raml-documentation-panel/compare/1.0.3...v1.0.4) (2016-12-09)
 
