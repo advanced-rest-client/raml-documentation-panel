@@ -29,5 +29,6 @@ Custom property | Description | Default
 `--raml-documentation-panel` | Mixin applied to the element | `{}`
 `--raml-docs-path-selector-width` | Width of the path selector. It is applied to both `width` and `min-width` properties | `256px`
 `--raml-docs-main-content` | Mixin applied to the main docs content (where the docs content is displayed). | `{}`
-`--raml-docs-main-content-width` | Max width of the documentation panel. Is fould be used to avoid usability issues for reading long texts. | `700px`
+`--raml-docs-main-content-width` | Max width of the documentation panel. Additional space is required for innner panels navigation | `900px`
+`--raml-docs-documentation-width` | Width of the documentation panel. It should be used to avoid usability issues for reading long texts. | `700px`
 
