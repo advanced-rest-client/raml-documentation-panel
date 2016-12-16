@@ -61,7 +61,7 @@ Custom property | Description | Default
     <style>
     :host {
       display: block;
-      @apply(raml-documentation-panel);
+      @apply(--raml-documentation-panel);
     }
 
     .content {
@@ -87,8 +87,7 @@ Custom property | Description | Default
     .docs-content {
       max-width: var(--raml-docs-main-content-width, 900px);
       @apply(--layout-flex);
-      @aaply(--raml-docs-main-content);
-
+      @apply(--raml-docs-main-content);
     }
 
     .docs-content raml-docs-documentation-viewer {
