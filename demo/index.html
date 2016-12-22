@@ -43,10 +43,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <body unresolved>
   <template is="dom-bind" id="app">
-    <raml-demo-page raml="{{raml}}" no-selector narrow="{{forceNarrow}}">
+    <raml-demo-page narrow="{{forceNarrow}}" selected-object="{{selectedObject}}" parent-endpoint="{{selectedParent}}" path="{{path}}">
       <h1 class="main-title">The raml-documentation-panel element</h1>
       <div main>
-        <raml-documentation-panel raml="{{raml}}" auto-hide narrow="{{narrow}}" on-tryit-requested="_tryit"></raml-documentation-panel>
+        <raml-documentation-panel narrow="[[narrow]]" selected-object="[[selectedObject]]" selected-parent="[[selectedParent]]" path="[[path]]" on-tryit-requested="_tryit"></raml-documentation-panel>
       </div>
     </raml-demo-page>
     <paper-toast opened="{{toastOpened}}" text="The request panel has been requested"></paper-toast>
