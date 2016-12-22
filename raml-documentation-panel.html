@@ -12,34 +12,36 @@ License for the specific language governing permissions and limitations under
 the License.
 -->
 <link rel="import" href="../polymer/polymer.html">
-<link rel="import" href="../raml-behaviors/raml-behavior.html">
-<link rel="import" href="../raml-path-selector/raml-path-selector.html">
-<link rel="import" href="../raml-path-to-object/raml-path-to-object.html">
 <link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../raml-docs-method-viewer/raml-docs-method-viewer.html">
 <link rel="import" href="../raml-docs-documentation-viewer/raml-docs-documentation-viewer.html">
 <link rel="import" href="../raml-docs-resource-viewer/raml-docs-resource-viewer.html">
-<link rel="import" href="../raml-aware/raml-aware.html">
 <link rel="import" href="../iron-media-query/iron-media-query.html">
 <!--
-`<raml-documentation-panel>` A documentation details panel.
-Its purpose is to compute documentation from the RAML file and display the
-result as a main documentation panel.
+The documentation details panel.
+Is shows a documentation panel depending on if the selected object is a
+method, resource or the documentation node.
+
+The computation of the selected object should be performed outside the element.
+Use the `raml-path-selector` with `raml-path-to-object` to get the data
+structure that this element can work with.
 
 ### Example
 ```
-<raml-documentation-panel raml="[[raml]]"></raml-documentation-panel>
+<raml-path-to-object selected-object="{{obj}}" ...></raml-path-to-object>
+<raml-documentation-panel
+  selected-object="[[obj]]"
+  selected-parent="[[selectedParent]]"
+  path="[[path]]"></raml-documentation-panel>
 ```
 or
 ```
-document.querySelector('raml-documentation-panel').raml = raml;
+document.querySelector('raml-documentation-panel').selectedObject = obj;
 ```
 
-Note: If you are using `raml-js-parser` element, remember that the Api object must be transformed
-to JSON and returned object's `specification` property is what this element accepts.
+The `path` property is required because the `raml-docs-resource-viewer`
+required current path to compute relative paths to sub-resources.
 
-Note: This element (actually `raml-path-to-object`) will chnage the strucure of the `raml` property.
-It's due to internal optymisation when computing required definitions.
 
 ### Styling
 `<raml-documentation-panel>` provides the following custom properties and mixins for styling:
@@ -47,10 +49,9 @@ It's due to internal optymisation when computing required definitions.
 Custom property | Description | Default
 ----------------|-------------|----------
 `--raml-documentation-panel` | Mixin applied to the element | `{}`
-`--raml-docs-path-selector-width` | Width of the path selector. It is applied to both `width` and `min-width` properties | `256px`
 `--raml-docs-main-content` | Mixin applied to the main docs content (where the docs content is displayed). | `{}`
 `--raml-docs-main-content-width` | Max width of the documentation panel. Additional space is required for innner panels navigation | `900px`
-`--raml-docs-documentation-width` | Width of the documentation panel. It should be used to avoid usability issues for reading long texts. | `700px`
+`--raml-docs-documentation-width` | Max width of the documentation panel. It should be used to avoid usability issues for reading long texts. | `700px`
 
 @group RAML Elements
 @element raml-documentation-panel
@@ -59,29 +60,9 @@ Custom property | Description | Default
 <dom-module id="raml-documentation-panel">
   <template>
     <style>
-    :host {
+     :host {
       display: block;
       @apply(--raml-documentation-panel);
-    }
-
-    .content {
-      @apply(--layout-horizontal);
-    }
-
-    :host([narrow]) .content {
-      @apply(--layout-vertical);
-    }
-
-    raml-path-selector {
-      width: var(--raml-docs-path-selector-width, 256px);
-      min-width: var(--raml-docs-path-selector-width, 256px);
-      overflow: auto;
-      margin-right: 8px;
-    }
-
-    :host([narrow]) raml-path-selector {
-      width: auto;
-      min-width: 1px;
     }
 
     .docs-content {
@@ -93,83 +74,38 @@ Custom property | Description | Default
     .docs-content raml-docs-documentation-viewer {
       max-width: var(--raml-docs-documentation-width, 700px);
     }
-
     </style>
     <iron-media-query query="(max-width: [[narrowWidth]])" query-matches="{{narrow}}"></iron-media-query>
-    <div class="content">
-      <raml-path-selector raml="[[raml]]" selected-path="{{selectedPath}}" narrow="[[narrow]]"></raml-path-selector>
-      <section class="docs-content">
-        <div class="no-selection" hidden$="[[hasSelection]]">
-          <p>Select topic in the RAML selector to see the documentation.</p>
-        </div>
-        <template is="dom-if" if="[[isMethod]]">
-          <raml-docs-method-viewer parent-endpoint="[[selectedParent]]" base-uri="[[raml.baseUri]]" raml="[[selectedObject]]" narrow="[[narrow]]"></raml-docs-method-viewer>
-        </template>
-        <template is="dom-if" if="[[isResource]]">
-          <raml-docs-resource-viewer raml="[[selectedObject]]" current-path="{{selectedPath}}" narrow="[[narrow]]"></raml-docs-resource-viewer>
-        </template>
-        <template is="dom-if" if="[[isDocumentation]]">
-          <raml-docs-documentation-viewer documentation="[[selectedObject]]" narrow="[[narrow]]"></raml-docs-documentation-viewer>
-        </template>
-      </section>
+    <div class="docs-content">
+      <div class="no-selection" hidden$="[[hasSelection]]">
+        <p>Select topic in the RAML selector to see the documentation.</p>
+      </div>
+      <template is="dom-if" if="[[isMethod]]">
+        <raml-docs-method-viewer parent-endpoint="[[selectedParent]]" raml="[[selectedObject]]" narrow="[[narrow]]"></raml-docs-method-viewer>
+      </template>
+      <template is="dom-if" if="[[isResource]]">
+        <raml-docs-resource-viewer raml="[[selectedObject]]" current-path="{{path}}" narrow="[[narrow]]"></raml-docs-resource-viewer>
+      </template>
+      <template is="dom-if" if="[[isDocumentation]]">
+        <raml-docs-documentation-viewer documentation="[[selectedObject]]" narrow="[[narrow]]"></raml-docs-documentation-viewer>
+      </template>
     </div>
-    <raml-path-to-object
-      raml="[[raml]]"
-      selected-path="{{selectedPath}}"
-      selected-object="{{selectedObject}}"
-      selected-parent="{{selectedParent}}"
-      is-method="{{isMethod}}"
-      is-resource="{{isResource}}"
-      is-documentation="{{isDocumentation}}"></raml-path-to-object>
-    <template is="dom-if" if="[[aware]]" restamp="true">
-      <raml-aware raml="{{raml}}" scope="[[aware]]"></raml-aware>
-    </template>
   </template>
   <script>
   Polymer({
     is: 'raml-documentation-panel',
-    behaviors: [Polymer.RamlBehavior],
+
     properties: {
-      raml: {
-        type: Object,
-        observer: '_ramlChanged'
-      },
-      // Slected path.
-      selectedPath: {
+      // Selcted path in the path selector.
+      path: {
         type: String,
-        notify: true
+        notify: true,
+        observer: '_pathChanged'
       },
-      // Selected object in the navigation menu
+      // An object selected in the `raml-path-selector`
       selectedObject: Object,
-      // A parent endpoint of selected method object (if any)
+      // Parent object selected in the `raml-path-selector`
       selectedParent: Object,
-      // True when current selection is a method
-      isMethod: {
-        type: Boolean,
-        value: false,
-        notify: true
-      },
-      // True when current selection is a resource
-      isResource: {
-        type: Boolean,
-        value: false,
-        notify: true
-      },
-      // True when current selection is a documentation node
-      isDocumentation: {
-        type: Boolean,
-        value: false,
-        notify: true
-      },
-      // True when anything is selected
-      hasSelection: {
-        type: Boolean,
-        value: false,
-        computed: '_computeHasSelection(isMethod,isResource,isDocumentation)',
-        notify: true
-      },
-      // Name of the `<raml-aware>` scope, it will update the `raml` property.
-      aware: String,
       /**
        * If set it will renders the view in the narrow layout.
        */
@@ -182,25 +118,61 @@ Custom property | Description | Default
       narrowWidth: {
         type: String,
         value: '768px'
+      },
+      // Set to true if the selected object is a method node of the RAML
+      isMethod: {
+        type: Boolean,
+        readOnly: true,
+        value: false
+      },
+      // Set to true if the selected object is a resource node of the RAML
+      isResource: {
+        type: Boolean,
+        readOnly: true,
+        value: false
+      },
+      // Set to true if the selected object is a documentation node of the RAML
+      isDocumentation: {
+        type: Boolean,
+        readOnly: true,
+        value: false
+      },
+      // Computed value if there is any selection made.
+      hasSelection: {
+        type: Boolean,
+        value: false,
+        notify: true,
+        computed: '_computeHasSelection(isMethod, isResource, isDocumentation)'
       }
     },
-
-    // Computes a boolean value if the user selected anything in the path selector.
+    // Returns true if any of the arguments is trurly
     _computeHasSelection: function(isMethod, isResource, isDocumentation) {
       return !!(isMethod || isResource || isDocumentation);
     },
+    // Hadnles path change and computes selected object type.
+    _pathChanged: function(path) {
+      var isMethod = false;
+      var isResource = false;
+      var isDocumentation = false;
 
-    // Resets the path then the RAML object change
-    _ramlChanged: function(raml) {
-      if (!raml) {
-        return this.set('selectedPath', '');
+      if (!path) {
+        this._setIsMethod(isMethod);
+        this._setIsResource(isResource);
+        this._setIsDocumentation(isDocumentation);
+        return;
       }
-      if (raml.documentation && raml.documentation.length) {
-        return this.set('selectedPath', 'documentation.0');
+
+      if (path.indexOf('documentation') === 0) {
+        isDocumentation = true;
+      } else if (/methods\.\d+$/.test(path)) {
+        isMethod = true;
+      } else if (/resources\.\d+$/.test(path)) {
+        isResource = true;
       }
-      if (raml.resources && raml.resources.length) {
-        return this.set('selectedPath', 'resources.0');
-      }
+
+      this._setIsMethod(isMethod);
+      this._setIsResource(isResource);
+      this._setIsDocumentation(isDocumentation);
     }
   });
   </script>
