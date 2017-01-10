@@ -1,3 +1,17 @@
+<a name="2.0.2"></a>
+## [2.0.2](https://github.com/advanced-rest-client/raml-documentation-panel/compare/1.0.6...v2.0.2) (2017-01-10)
+
+
+### Breaking
+
+* Removed path selecteor and any RAML processing from the element. Now the element expect to get the data from the outside. The base reason is performance. An app will most prabobly need to use path selector and raml-path-to-object elements more than once if it is included in many elements and when the path changin all of this elements would perform a comutation. New version prohibits this behavior but the data must be provided to it ([c4e0fbb11c42692ddf189c62059874d2f0ad3bda](https://github.com/advanced-rest-client/raml-documentation-panel/commit/c4e0fbb11c42692ddf189c62059874d2f0ad3bda))
+
+### Update
+
+* Updated element to work with new parser output ([c00c538273b2002fa7f083814c5c0fa8e2c6bfe3](https://github.com/advanced-rest-client/raml-documentation-panel/commit/c00c538273b2002fa7f083814c5c0fa8e2c6bfe3))
+
+
+
 <a name="2.0.1"></a>
 ## [2.0.1](https://github.com/advanced-rest-client/raml-documentation-panel/compare/1.0.6...v2.0.1) (2016-12-22)
 
