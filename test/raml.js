@@ -666,7 +666,7 @@ const RAML_TEST = {
               "key": "version"
             }
           ],
-          "absoluteUrl": "http://{environment}.api.domain.com/{version}/people"
+          "absoluteUri": "http://{environment}.api.domain.com/{version}/people"
         },
         {
           "body": [
