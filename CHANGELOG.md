@@ -1,3 +1,13 @@
+<a name="2.0.5"></a>
+## [2.0.5](https://github.com/advanced-rest-client/raml-documentation-panel/compare/2.0.3...v2.0.5) (2017-01-12)
+
+
+### New
+
+* Added an element to display an empty state - the state when none of the documentation nodes are selected and therefore there's nothing to display ([dcb86b30e238e9b69136c7bc795e9248a9737207](https://github.com/advanced-rest-client/raml-documentation-panel/commit/dcb86b30e238e9b69136c7bc795e9248a9737207))
+
+
+
 <a name="2.0.4"></a>
 ## [2.0.4](https://github.com/advanced-rest-client/raml-documentation-panel/compare/2.0.3...v2.0.4) (2017-01-12)
 
