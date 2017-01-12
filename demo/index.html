@@ -26,6 +26,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   body {
     margin: 0;
     padding: 0;
+    height: 100%;
     font-family: 'Roboto', 'Noto', sans-serif;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
@@ -38,6 +39,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     white-space: pre-line !important;
     word-break: break-all;
   }
+
+  .content,
+  raml-documentation-panel {
+    height: 100%;
+    margin-left: 16px;
+  }
+
+  raml-demo-page {
+    height: 100%;
+  }
+  /* The height: 100% here is for the `raml-documentation-empty-state` element so it renders in full height */
   </style>
 </head>
 
@@ -45,7 +57,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <template is="dom-bind" id="app">
     <raml-demo-page narrow="{{forceNarrow}}" selected-object="{{selectedObject}}" parent-endpoint="{{selectedParent}}" path="{{path}}">
       <h1 class="main-title">The raml-documentation-panel element</h1>
-      <div main>
+      <div main class="content">
         <raml-documentation-panel narrow="[[narrow]]" selected-object="[[selectedObject]]" selected-parent="[[selectedParent]]" path="[[path]]" on-tryit-requested="_tryit"></raml-documentation-panel>
       </div>
     </raml-demo-page>

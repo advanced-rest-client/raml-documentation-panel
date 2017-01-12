@@ -17,7 +17,8 @@ the License.
 <link rel="import" href="../raml-docs-documentation-viewer/raml-docs-documentation-viewer.html">
 <link rel="import" href="../raml-docs-resource-viewer/raml-docs-resource-viewer.html">
 <link rel="import" href="../iron-media-query/iron-media-query.html">
-<!--
+<link rel="import" href="raml-documentation-empty-state.html">
+ <!--
 The documentation details panel.
 Is shows a documentation panel depending on if the selected object is a
 method, resource or the documentation node.
@@ -62,6 +63,7 @@ Custom property | Description | Default
     <style>
      :host {
       display: block;
+      height: 100%;
       @apply(--raml-documentation-panel);
     }
 
@@ -74,11 +76,16 @@ Custom property | Description | Default
     .docs-content raml-docs-documentation-viewer {
       max-width: var(--raml-docs-documentation-width, 700px);
     }
+
+    .no-selection,
+    .docs-content {
+      height: 100%;
+    }
     </style>
     <iron-media-query query="(max-width: [[narrowWidth]])" query-matches="{{narrow}}"></iron-media-query>
     <div class="docs-content">
       <div class="no-selection" hidden$="[[hasSelection]]">
-        <p>Select topic in the RAML selector to see the documentation.</p>
+        <raml-documentation-empty-state></raml-documentation-empty-state>
       </div>
       <template is="dom-if" if="[[isMethod]]">
         <raml-docs-method-viewer parent-endpoint="[[selectedParent]]" raml="[[selectedObject]]" narrow="[[narrow]]"></raml-docs-method-viewer>
