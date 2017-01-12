@@ -13,7 +13,8 @@
   ],
   "private": true,
   "main": [
-    "raml-documentation-panel.html"
+    "raml-documentation-panel.html",
+    "raml-documentation-empty-state.html"
   ],
   "repository": {
     "type": "git",
@@ -25,7 +26,9 @@
     "raml-docs-method-viewer": "advanced-rest-client/raml-docs-method-viewer#^0.1.4",
     "raml-docs-resource-viewer": "advanced-rest-client/raml-docs-resource-viewer#^1.0.1",
     "raml-docs-documentation-viewer": "advanced-rest-client/raml-docs-documentation-viewer#^1.0.1",
-    "iron-media-query": "PolymerElements/iron-media-query#^1.0.8"
+    "iron-media-query": "PolymerElements/iron-media-query#^1.0.8",
+    "iron-iconset-svg": "PolymerElements/iron-iconset-svg#^1.0.9",
+    "iron-icon": "PolymerElements/iron-icon#^1.0.12"
   },
   "devDependencies": {
     "iron-component-page": "polymerelements/iron-component-page#1.0.0",
