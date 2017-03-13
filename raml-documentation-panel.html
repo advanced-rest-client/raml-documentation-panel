@@ -17,6 +17,7 @@ the License.
 <link rel="import" href="../raml-docs-documentation-viewer/raml-docs-documentation-viewer.html">
 <link rel="import" href="../raml-docs-resource-viewer/raml-docs-resource-viewer.html">
 <link rel="import" href="../iron-media-query/iron-media-query.html">
+<link rel="import" href="../raml-summary-view/raml-summary-view.html">
 <link rel="import" href="raml-documentation-empty-state.html">
  <!--
 The documentation details panel.
@@ -96,6 +97,12 @@ Custom property | Description | Default
       <template is="dom-if" if="[[isDocumentation]]">
         <raml-docs-documentation-viewer documentation="[[selectedObject]]" narrow="[[narrow]]"></raml-docs-documentation-viewer>
       </template>
+      <template is="dom-if" if="[[isSummary]]">
+        <raml-summary-view raml="[[selectedObject]]" narrow="[[narrow]]"></raml-summary-view>
+      </template>
+      <template is="dom-if" if="[[isType]]">
+        <!-- TODO: type viewer -->
+      </template>
     </div>
   </template>
   <script>
@@ -144,42 +151,58 @@ Custom property | Description | Default
         readOnly: true,
         value: false
       },
+      // Set to true if the selected object is a summary view for the RAML
+      isSummary: {
+        type: Boolean,
+        readOnly: true,
+        value: false
+      },
+      // Set to true if the selected object is a summary view for the RAML
+      isType: {
+        type: Boolean,
+        readOnly: true,
+        value: false
+      },
       // Computed value if there is any selection made.
       hasSelection: {
         type: Boolean,
         value: false,
         notify: true,
-        computed: '_computeHasSelection(isMethod, isResource, isDocumentation)'
+        computed: '_computeHasSelection(isMethod, isResource, isDocumentation, isSummary, isType)'
       }
     },
     // Returns true if any of the arguments is trurly
-    _computeHasSelection: function(isMethod, isResource, isDocumentation) {
-      return !!(isMethod || isResource || isDocumentation);
+    _computeHasSelection: function(isMethod, isResource, isDocumentation,
+        isSummary, isType) {
+      return !!(isMethod || isResource || isDocumentation || isSummary || isType);
     },
     // Hadnles path change and computes selected object type.
     _pathChanged: function(path) {
       var isMethod = false;
       var isResource = false;
       var isDocumentation = false;
+      var isSummary = false;
+      var isType = false;
 
-      if (!path) {
-        this._setIsMethod(isMethod);
-        this._setIsResource(isResource);
-        this._setIsDocumentation(isDocumentation);
-        return;
-      }
-
-      if (path.indexOf('documentation') === 0) {
-        isDocumentation = true;
-      } else if (/methods\.\d+$/.test(path)) {
-        isMethod = true;
-      } else if (/resources\.\d+$/.test(path)) {
-        isResource = true;
+      if (path) {
+        if (path.indexOf('documentation') === 0) {
+          isDocumentation = true;
+        } else if (/methods\.\d+$/.test(path)) {
+          isMethod = true;
+        } else if (/resources\.\d+$/.test(path)) {
+          isResource = true;
+        } else if (path === 'summary') {
+          isSummary = true;
+        } else if (/types\.\d+$/.test(path)) {
+          isType = true;
+        }
       }
 
       this._setIsMethod(isMethod);
       this._setIsResource(isResource);
       this._setIsDocumentation(isDocumentation);
+      this._setIsSummary(isSummary);
+      this._setIsType(isType);
     }
   });
   </script>
