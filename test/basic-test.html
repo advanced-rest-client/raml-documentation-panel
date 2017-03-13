@@ -18,9 +18,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <script src="../../iron-test-helpers/test-helpers.js"></script>
     <script src="../../iron-test-helpers/mock-interactions.js"></script>
     <!-- <script src="raml.js"></script> -->
-    <!-- Step 1: import the element to test -->
     <link rel="import" href="../raml-documentation-panel.html">
-
   </head>
   <body>
 
@@ -36,33 +34,76 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       var element;
       setup(function() {
         element = fixture('basic');
-      });
-      test('The selectedPath is empty when initialized', function() {
         forceXIfStamp(element);
-        assert.notOk(element.selectedPath);
+      });
+      test('The path is empty when initialized', function() {
+        assert.notOk(element.path);
       });
 
       test('The hasSelection is false', function() {
-        forceXIfStamp(element);
         assert.equal(element.hasSelection, false);
       });
 
+      test('Empty state screen is displayed.', function() {
+        var panel = Polymer.dom(element.root).querySelector('raml-documentation-empty-state');
+        assert.isDefined(panel);
+      });
+
       test('The selectedObject is undefined', function() {
-        forceXIfStamp(element);
-        assert.equal(element.selectedObject, undefined);
+        assert.isUndefined(element.selectedObject);
       });
       test('The selectedParent is undefined', function() {
-        forceXIfStamp(element);
-        assert.equal(element.selectedParent, undefined);
+        assert.isUndefined(element.selectedParent);
       });
       test('The only isDocumentation is false', function() {
-        assert.equal(element.isDocumentation, false);
+        assert.isFalse(element.isDocumentation);
       });
       test('The only isResource is false', function() {
-        assert.equal(element.isResource, false);
+        assert.isFalse(element.isResource);
       });
       test('The only isMethod is false', function() {
-        assert.equal(element.isMethod, false);
+        assert.isFalse(element.isMethod);
+      });
+
+      test('The only isSummary is false', function() {
+        assert.isFalse(element.isSummary);
+      });
+
+      test('The only isType is false', function() {
+        assert.isFalse(element.isType);
+      });
+
+      test('Selects the documentation', function() {
+        element.path = 'documentation.0';
+        assert.isTrue(element.isDocumentation);
+        var panel = Polymer.dom(element.root).querySelector('raml-docs-method-viewer');
+        assert.isDefined(panel);
+      });
+
+      test('Selects the resource', function() {
+        element.path = 'resources.0';
+        assert.isTrue(element.isResource);
+        var panel = Polymer.dom(element.root).querySelector('raml-docs-method-viewer');
+        assert.isDefined(panel);
+      });
+
+      test('Selects the method', function() {
+        element.path = 'resources.0.methods.0';
+        assert.isTrue(element.isMethod);
+        var panel = Polymer.dom(element.root).querySelector('raml-docs-method-viewer');
+        assert.isDefined(panel);
+      });
+
+      test('Selects the API summary', function() {
+        element.path = 'summary';
+        assert.isTrue(element.isSummary);
+        var panel = Polymer.dom(element.root).querySelector('raml-summary-view');
+        assert.isDefined(panel);
+      });
+
+      test('Selects the type viewer', function() {
+        element.path = 'types.0';
+        assert.isTrue(element.isType);
       });
     });
 
