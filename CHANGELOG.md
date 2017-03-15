@@ -1,3 +1,19 @@
+<a name="2.0.8"></a>
+## [2.0.8](https://github.com/advanced-rest-client/raml-documentation-panel/compare/2.0.6...v2.0.8) (2017-03-15)
+
+
+### Update
+
+* Added type viewer ([1a462dd7adda2c3cedbe0c75c406d9eea72265bb](https://github.com/advanced-rest-client/raml-documentation-panel/commit/1a462dd7adda2c3cedbe0c75c406d9eea72265bb))
+
+
+
+<a name="2.0.7"></a>
+## [2.0.7](https://github.com/advanced-rest-client/raml-documentation-panel/compare/2.0.6...v2.0.7) (2017-03-15)
+
+
+
+
 <a name="2.0.6"></a>
 ## [2.0.6](https://github.com/advanced-rest-client/raml-documentation-panel/compare/2.0.5...v2.0.6) (2017-03-13)
 
