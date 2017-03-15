@@ -18,6 +18,7 @@ the License.
 <link rel="import" href="../raml-docs-resource-viewer/raml-docs-resource-viewer.html">
 <link rel="import" href="../iron-media-query/iron-media-query.html">
 <link rel="import" href="../raml-summary-view/raml-summary-view.html">
+<link rel="import" href="../raml-docs-types-viewer/raml-docs-types-viewer.html">
 <link rel="import" href="raml-documentation-empty-state.html">
  <!--
 The documentation details panel.
@@ -101,7 +102,7 @@ Custom property | Description | Default
         <raml-summary-view raml="[[selectedObject]]" narrow="[[narrow]]"></raml-summary-view>
       </template>
       <template is="dom-if" if="[[isType]]">
-        <!-- TODO: type viewer -->
+        <raml-docs-types-viewer type="[[selectedObject]]" narrow="[[narrow]]"></raml-docs-types-viewer>
       </template>
     </div>
   </template>
