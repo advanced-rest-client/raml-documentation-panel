@@ -1,3 +1,17 @@
+<a name="2.0.6"></a>
+## [2.0.6](https://github.com/advanced-rest-client/raml-documentation-panel/compare/2.0.5...v2.0.6) (2017-03-13)
+
+
+### Update
+
+* Added dependency to the summary view ([b6956c9780d360dfcc5080de12b5497ea52dfe20](https://github.com/advanced-rest-client/raml-documentation-panel/commit/b6956c9780d360dfcc5080de12b5497ea52dfe20))
+* Added new summary view. Created a placeholder for future type viewer ([64e194c6410d65338c17fac27febbcef2e22175e](https://github.com/advanced-rest-client/raml-documentation-panel/commit/64e194c6410d65338c17fac27febbcef2e22175e))
+* Updated lint command to include empty state element: ([2784debe96e4bcdd8728e642490573b42853d117](https://github.com/advanced-rest-client/raml-documentation-panel/commit/2784debe96e4bcdd8728e642490573b42853d117))
+* Updated tests for new API ([a5be1441ceee1f1c2233984776665dc58918c596](https://github.com/advanced-rest-client/raml-documentation-panel/commit/a5be1441ceee1f1c2233984776665dc58918c596))
+* Updated Travis configutarion - test command and browsers list to test ([2b6d54bf5a8a67fda2a1db0ae0b82f5b09e406ff](https://github.com/advanced-rest-client/raml-documentation-panel/commit/2b6d54bf5a8a67fda2a1db0ae0b82f5b09e406ff))
+
+
+
 <a name="2.0.5"></a>
 ## [2.0.5](https://github.com/advanced-rest-client/raml-documentation-panel/compare/2.0.3...v2.0.5) (2017-01-12)
 
