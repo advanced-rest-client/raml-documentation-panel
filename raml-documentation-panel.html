@@ -93,7 +93,7 @@ Custom property | Description | Default
         <raml-docs-method-viewer parent-endpoint="[[selectedParent]]" raml="[[selectedObject]]" narrow="[[narrow]]"></raml-docs-method-viewer>
       </template>
       <template is="dom-if" if="[[isResource]]">
-        <raml-docs-resource-viewer raml="[[selectedObject]]" current-path="{{path}}" narrow="[[narrow]]"></raml-docs-resource-viewer>
+        <raml-docs-resource-viewer raml="[[selectedObject]]" current-path="{{path}}" narrow="[[narrow]]" scroll-target="[[scrollTarget]]"></raml-docs-resource-viewer>
       </template>
       <template is="dom-if" if="[[isDocumentation]]">
         <raml-docs-documentation-viewer documentation="[[selectedObject]]" narrow="[[narrow]]"></raml-docs-documentation-viewer>
@@ -170,8 +170,40 @@ Custom property | Description | Default
         value: false,
         notify: true,
         computed: '_computeHasSelection(isMethod, isResource, isDocumentation, isSummary, isType)'
+      },
+      // An element that handles application scroll region.
+      // Default scroll target is the window.
+      scrollTarget: HTMLElement,
+      /**
+       * By default the element computes which view to display.
+       * If this property is set then it will not compute current view
+       * type and will listen for events fired by the `raml-path-to-object`
+       * element. Use it only if you use `raml-path-to-object` to optymize
+       * the app.
+       */
+      handlePathEvents: {
+        type: Boolean,
+        observer: '_handleEventsChanged'
+      },
+      // True when the element is attached to the DOM.
+      isElementAttached: {
+        type: Boolean,
+        readOnly: true
       }
     },
+
+    observers: [
+      '_handleEventsChanged(handlePathEvents, isElementAttached)'
+    ],
+
+    attached: function() {
+      this._setIsElementAttached(true);
+    },
+
+    detached: function() {
+      this._setIsElementAttached(false);
+    },
+
     // Returns true if any of the arguments is trurly
     _computeHasSelection: function(isMethod, isResource, isDocumentation,
         isSummary, isType) {
@@ -179,6 +211,9 @@ Custom property | Description | Default
     },
     // Hadnles path change and computes selected object type.
     _pathChanged: function(path) {
+      if (this.handlePathEvents) {
+        return;
+      }
       var isMethod = false;
       var isResource = false;
       var isDocumentation = false;
@@ -204,6 +239,65 @@ Custom property | Description | Default
       this._setIsDocumentation(isDocumentation);
       this._setIsSummary(isSummary);
       this._setIsType(isType);
+    },
+    /**
+     * Handler for the `handlePathEvents` property change.
+     * Registers or unregisters path change listeners depending on
+     * the `handlePathEvents` property value.
+     */
+    _handleEventsChanged: function(handlePathEvents, isElementAttached) {
+      if (handlePathEvents && isElementAttached) {
+        this.registerPathEvents();
+      } else {
+        this.unregisterPathEvents();
+      }
+    },
+    /**
+     * Resisters raml-path-to-object events fired when the path change.
+     *
+     * Handled events:
+     * - raml-is-method-changed
+     * - raml-is-resource-changed
+     * - raml-is-documentation-changed
+     * - raml-is-summary-changed
+     * - raml-is-type-changed
+     */
+    registerPathEvents: function() {
+      this.listen(window, 'raml-is-method-changed', '_onChangedSateMethod');
+      this.listen(window, 'raml-is-resource-changed', '_onChangedSateResource');
+      this.listen(window, 'raml-is-documentation-changed', '_onChangedSateDocs');
+      this.listen(window, 'raml-is-summary-changed', '_onChangedSateSummary');
+      this.listen(window, 'raml-is-type-changed', '_onChangedSateType');
+      // raml-selected-object-changed
+      // raml-selected-parent-changed
+    },
+
+    unregisterPathEvents: function() {
+      this.unlisten(window, 'raml-is-method-changed', '_onChangedSateMethod');
+      this.unlisten(window, 'raml-is-resource-changed', '_onChangedSateResource');
+      this.unlisten(window, 'raml-is-documentation-changed', '_onChangedSateDocs');
+      this.unlisten(window, 'raml-is-summary-changed', '_onChangedSateSummary');
+      this.unlisten(window, 'raml-is-type-changed', '_onChangedSateType');
+    },
+
+    _onChangedSateMethod: function(e) {
+      this._setIsMethod(e.detail.state);
+    },
+
+    _onChangedSateResource: function(e) {
+      this._setIsResource(e.detail.state);
+    },
+
+    _onChangedSateDocs: function(e) {
+      this._setIsDocumentation(e.detail.state);
+    },
+
+    _onChangedSateSummary: function(e) {
+      this._setIsSummary(e.detail.state);
+    },
+
+    _onChangedSateType: function(e) {
+      this._setIsType(e.detail.state);
     }
   });
   </script>
