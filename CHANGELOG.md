@@ -1,3 +1,13 @@
+<a name="2.0.14"></a>
+## [2.0.14](https://github.com/advanced-rest-client/raml-documentation-panel/compare/2.0.12...v2.0.14) (2017-04-10)
+
+
+### Docs
+
+* Updated documenbtation for the element ([9a6f0f42790aa9e286130641af0553032d6332cf](https://github.com/advanced-rest-client/raml-documentation-panel/commit/9a6f0f42790aa9e286130641af0553032d6332cf))
+
+
+
 <a name="2.0.13"></a>
 ## [2.0.13](https://github.com/advanced-rest-client/raml-documentation-panel/compare/2.0.12...v2.0.13) (2017-04-10)
 
