@@ -1,3 +1,18 @@
+<a name="2.0.16"></a>
+## [2.0.16](https://github.com/advanced-rest-client/raml-documentation-panel/compare/2.0.15...v2.0.16) (2017-05-11)
+
+
+### New
+
+* Added support for no-try-it attribute of the raml-docs-method-viewer ([abe7ba2d7b4a651b158b9ab2436caca676361cdf](https://github.com/advanced-rest-client/raml-documentation-panel/commit/abe7ba2d7b4a651b158b9ab2436caca676361cdf))
+
+### Update
+
+* removed bower from travis cache ([ffad04072da0381ed41bdf582dd6fcab056bfe2d](https://github.com/advanced-rest-client/raml-documentation-panel/commit/ffad04072da0381ed41bdf582dd6fcab056bfe2d))
+* Removed empty state screen ([c20664e013efda2fb780007a037a06af6bad656f](https://github.com/advanced-rest-client/raml-documentation-panel/commit/c20664e013efda2fb780007a037a06af6bad656f))
+
+
+
 <a name="2.0.15"></a>
 ## [2.0.15](https://github.com/advanced-rest-client/raml-documentation-panel/compare/2.0.14...v2.0.15) (2017-04-10)
 
