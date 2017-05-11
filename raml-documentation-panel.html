@@ -110,7 +110,7 @@ Custom property | Description | Default
         <raml-documentation-empty-state></raml-documentation-empty-state>
       </div> -->
       <template is="dom-if" if="[[isMethod]]">
-        <raml-docs-method-viewer parent-endpoint="[[selectedParent]]" raml="[[selectedObject]]" narrow="[[narrow]]"></raml-docs-method-viewer>
+        <raml-docs-method-viewer parent-endpoint="[[selectedParent]]" raml="[[selectedObject]]" narrow="[[narrow]]" no-try-it="[[noTryIt]]"></raml-docs-method-viewer>
       </template>
       <template is="dom-if" if="[[isResource]]">
         <raml-docs-resource-viewer raml="[[selectedObject]]" current-path="{{path}}" narrow="[[narrow]]" scroll-target="[[scrollTarget]]"></raml-docs-resource-viewer>
@@ -209,7 +209,14 @@ Custom property | Description | Default
       isElementAttached: {
         type: Boolean,
         readOnly: true
-      }
+      },
+      /**
+       * If set then the API console hide the "try it" button from the
+       * method documentation view. The request and response panels still will
+       * be available, but to enter this section you'll have to do it
+       * programatically.
+       */
+      noTryIt: Boolean
     },
 
     observers: [
