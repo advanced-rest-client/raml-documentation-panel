@@ -75,35 +75,37 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       test('Selects the documentation', function() {
         element.path = 'documentation.0';
-        assert.isTrue(element.isDocumentation);
-        var panel = Polymer.dom(element.root).querySelector('raml-docs-method-viewer');
-        assert.isDefined(panel);
+        assert.isTrue(element.isDocumentation, 'element.isDocumentation is true');
+        var panel = Polymer.dom(element.root).querySelector('raml-docs-documentation-viewer');
+        assert.isDefined(panel, 'panel is defined');
       });
 
       test('Selects the resource', function() {
         element.path = 'resources.0';
-        assert.isTrue(element.isResource);
-        var panel = Polymer.dom(element.root).querySelector('raml-docs-method-viewer');
-        assert.isDefined(panel);
+        assert.isTrue(element.isResource, 'element.isResource is true');
+        var panel = Polymer.dom(element.root).querySelector('raml-docs-resource-viewer');
+        assert.isDefined(panel, 'panel is defined');
       });
 
       test('Selects the method', function() {
         element.path = 'resources.0.methods.0';
-        assert.isTrue(element.isMethod);
+        assert.isTrue(element.isMethod, 'element.isMethod is true');
         var panel = Polymer.dom(element.root).querySelector('raml-docs-method-viewer');
-        assert.isDefined(panel);
+        assert.isDefined(panel, 'panel is defined');
       });
 
       test('Selects the API summary', function() {
         element.path = 'summary';
-        assert.isTrue(element.isSummary);
+        assert.isTrue(element.isSummary, 'element.isSummary is true');
         var panel = Polymer.dom(element.root).querySelector('raml-summary-view');
-        assert.isDefined(panel);
+        assert.isDefined(panel, 'panel is defined');
       });
 
       test('Selects the type viewer', function() {
         element.path = 'types.0';
-        assert.isTrue(element.isType);
+        assert.isTrue(element.isType, 'element.isType is true');
+        var panel = Polymer.dom(element.root).querySelector('raml-docs-types-viewer');
+        assert.isDefined(panel, 'panel is defined');
       });
     });
 

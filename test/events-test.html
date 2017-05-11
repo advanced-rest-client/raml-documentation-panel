@@ -1,0 +1,95 @@
+<!doctype html>
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../../web-component-tester/browser.js"></script>
+    <script src="../../iron-test-helpers/test-helpers.js"></script>
+    <script src="../../iron-test-helpers/mock-interactions.js"></script>
+    <!-- <script src="raml.js"></script> -->
+    <link rel="import" href="../raml-documentation-panel.html">
+  </head>
+  <body>
+
+    <test-fixture id="basic">
+      <template>
+        <raml-documentation-panel handle-path-events></raml-documentation-panel>
+      </template>
+    </test-fixture>
+
+    <script>
+    /* global suite, test, fixture, assert, forceXIfStamp */
+    suite('path-events', function() {
+      var element;
+      setup(function() {
+        element = fixture('basic');
+        forceXIfStamp(element);
+      });
+
+      function fireChangeEvent(type) {
+        var event = new CustomEvent('raml-is-' + type + '-changed', {
+          detail: {
+            state: true
+          },
+          bubbles: true
+        });
+        document.body.dispatchEvent(event);
+      }
+
+      test('Element do not parse path after the path change', function() {
+        element.path = 'documentation.0';
+        assert.isFalse(element.isDocumentation, 'element.isDocumentation is false');
+        var panel = Polymer.dom(element.root).querySelector('raml-docs-method-viewer');
+        assert.isNull(panel, 'panel is undefined');
+      });
+
+      test('Selects the documentation', function() {
+        fireChangeEvent('documentation');
+        assert.isTrue(element.isDocumentation, 'element.isDocumentation is true');
+        var panel = Polymer.dom(element.root).querySelector('raml-docs-method-viewer');
+        assert.isDefined(panel, 'panel is defined');
+      });
+
+      test('Selects the resource', function() {
+        fireChangeEvent('resource');
+        assert.isTrue(element.isResource, 'element.isResource is true');
+        var panel = Polymer.dom(element.root).querySelector('raml-docs-resource-viewer');
+        assert.isDefined(panel, 'panel is defined');
+      });
+
+      test('Selects the method', function() {
+        fireChangeEvent('method');
+        assert.isTrue(element.isMethod, 'element.isMethod is true');
+        var panel = Polymer.dom(element.root).querySelector('raml-docs-method-viewer');
+        assert.isDefined(panel, 'panel is defined');
+      });
+
+      test('Selects the API summary', function() {
+        fireChangeEvent('summary');
+        assert.isTrue(element.isSummary, 'element.isSummary is true');
+        var panel = Polymer.dom(element.root).querySelector('raml-summary-view');
+        assert.isDefined(panel, 'panel is defined');
+      });
+
+      test('Selects the type viewer', function() {
+        fireChangeEvent('type');
+        assert.isTrue(element.isType, 'element.isType is true');
+        var panel = Polymer.dom(element.root).querySelector('raml-docs-types-viewer');
+        assert.isDefined(panel, 'panel is defined');
+      });
+    });
+    </script>
+
+  </body>
+</html>
