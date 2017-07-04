@@ -115,7 +115,7 @@ Custom property | Description | Default
         <raml-docs-documentation-viewer documentation="[[selectedObject]]" narrow="[[narrow]]"></raml-docs-documentation-viewer>
       </template>
       <template is="dom-if" if="[[isSummary]]">
-        <raml-summary-view raml="[[selectedObject]]"></raml-summary-view>
+        <raml-summary-view current-path="{{path}}" raml="[[selectedObject]]"></raml-summary-view>
       </template>
       <template is="dom-if" if="[[isType]]">
         <raml-docs-types-viewer type="[[selectedObject]]" narrow="[[narrow]]"></raml-docs-types-viewer>
