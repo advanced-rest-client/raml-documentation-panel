@@ -1,3 +1,14 @@
+<a name="2.0.18"></a>
+## [2.0.18](https://github.com/advanced-rest-client/raml-documentation-panel/compare/2.0.17...v2.0.18) (2017-07-04)
+
+
+### Update
+
+* Added required property to the element. ([f585d2230a6b3794bc48707daf4cb4bf0d41301d](https://github.com/advanced-rest-client/raml-documentation-panel/commit/f585d2230a6b3794bc48707daf4cb4bf0d41301d))
+* Updated style definition to not mix class names. ([fb67aeb79169698f668a79ab3f1997f2ac0ef00f](https://github.com/advanced-rest-client/raml-documentation-panel/commit/fb67aeb79169698f668a79ab3f1997f2ac0ef00f))
+
+
+
 <a name="2.0.17"></a>
 ## [2.0.17](https://github.com/advanced-rest-client/raml-documentation-panel/compare/2.0.15...v2.0.17) (2017-07-04)
 
