@@ -13,8 +13,7 @@
   ],
   "private": true,
   "main": [
-    "raml-documentation-panel.html",
-    "raml-documentation-empty-state.html"
+    "raml-documentation-panel.html"
   ],
   "repository": {
     "type": "git",
