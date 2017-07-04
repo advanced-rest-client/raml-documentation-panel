@@ -19,7 +19,6 @@ the License.
 <link rel="import" href="../iron-media-query/iron-media-query.html">
 <link rel="import" href="../raml-summary-view/raml-summary-view.html">
 <link rel="import" href="../raml-docs-types-viewer/raml-docs-types-viewer.html">
-<!-- <link rel="import" href="raml-documentation-empty-state.html"> -->
  <!--
 The documentation viewer.
 
@@ -106,9 +105,6 @@ Custom property | Description | Default
     </style>
     <iron-media-query query="(max-width: [[narrowWidth]])" query-matches="{{narrow}}"></iron-media-query>
     <div class="docs-content">
-      <!-- <div class="no-selection" hidden$="[[hasSelection]]">
-        <raml-documentation-empty-state></raml-documentation-empty-state>
-      </div> -->
       <template is="dom-if" if="[[isMethod]]">
         <raml-docs-method-viewer parent-endpoint="[[selectedParent]]" raml="[[selectedObject]]" narrow="[[narrow]]" no-try-it="[[noTryIt]]"></raml-docs-method-viewer>
       </template>
