@@ -30,7 +30,7 @@
     "iron-iconset-svg": "PolymerElements/iron-iconset-svg#^1.0.9",
     "iron-icon": "PolymerElements/iron-icon#^1.0.12",
     "raml-summary-view": "advanced-rest-client/raml-summary-view#^1.0.3",
-    "raml-docs-types-viewer": "advanced-rest-client/raml-docs-types-viewer#^0.0.2"
+    "raml-docs-types-viewer": "advanced-rest-client/raml-docs-types-viewer#^0.1.0"
   },
   "devDependencies": {
     "iron-component-page": "polymerelements/iron-component-page#1.0.0",
