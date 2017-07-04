@@ -1,3 +1,28 @@
+<a name="2.0.17"></a>
+## [2.0.17](https://github.com/advanced-rest-client/raml-documentation-panel/compare/2.0.15...v2.0.17) (2017-07-04)
+
+
+### Fix
+
+* Made linter happy again. ([933becf04f3301787d1e50ec915098254ece20a6](https://github.com/advanced-rest-client/raml-documentation-panel/commit/933becf04f3301787d1e50ec915098254ece20a6))
+
+### New
+
+* Added support for no-try-it attribute of the raml-docs-method-viewer ([abe7ba2d7b4a651b158b9ab2436caca676361cdf](https://github.com/advanced-rest-client/raml-documentation-panel/commit/abe7ba2d7b4a651b158b9ab2436caca676361cdf))
+
+### Update
+
+* removed bower from travis cache ([ffad04072da0381ed41bdf582dd6fcab056bfe2d](https://github.com/advanced-rest-client/raml-documentation-panel/commit/ffad04072da0381ed41bdf582dd6fcab056bfe2d))
+* Removed empty state element. ([b4c01733b8cad4852905c71d709126bb1152c2cb](https://github.com/advanced-rest-client/raml-documentation-panel/commit/b4c01733b8cad4852905c71d709126bb1152c2cb))
+* Removed empty state file reference from bower.json ([2695c6de54f61ab32787592f26a1057534817d47](https://github.com/advanced-rest-client/raml-documentation-panel/commit/2695c6de54f61ab32787592f26a1057534817d47))
+* Removed empty state screen ([c20664e013efda2fb780007a037a06af6bad656f](https://github.com/advanced-rest-client/raml-documentation-panel/commit/c20664e013efda2fb780007a037a06af6bad656f))
+* Removed sudo command from Travis configuration. ([3781b1e49049b887a85fd6edb92abc4aa80f1d18](https://github.com/advanced-rest-client/raml-documentation-panel/commit/3781b1e49049b887a85fd6edb92abc4aa80f1d18))
+* Updated dependencies version for tests and demo page. ([eeb5a6110685b3b0e3f92b3b2a9240ada92dd5df](https://github.com/advanced-rest-client/raml-documentation-panel/commit/eeb5a6110685b3b0e3f92b3b2a9240ada92dd5df))
+* Updated tests definitions. ([0049e56b2a408f8c10e3908fdf3b64e00d7ca1cc](https://github.com/advanced-rest-client/raml-documentation-panel/commit/0049e56b2a408f8c10e3908fdf3b64e00d7ca1cc))
+* Updated version of the `raml-docs-types-viewer` element. ([d82508fb8a559ce5c64630b32aa8d8f130f0c279](https://github.com/advanced-rest-client/raml-documentation-panel/commit/d82508fb8a559ce5c64630b32aa8d8f130f0c279))
+
+
+
 <a name="2.0.16"></a>
 ## [2.0.16](https://github.com/advanced-rest-client/raml-documentation-panel/compare/2.0.15...v2.0.16) (2017-05-11)
 
