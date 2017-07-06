@@ -1,3 +1,13 @@
+<a name="2.0.20"></a>
+## [2.0.20](https://github.com/advanced-rest-client/raml-documentation-panel/compare/2.0.19...v2.0.20) (2017-07-06)
+
+
+### Update
+
+* Updated element usage after it's API Change ([a564d36b3f6e81a104dd52ae8d9d1cc3687b7d7b](https://github.com/advanced-rest-client/raml-documentation-panel/commit/a564d36b3f6e81a104dd52ae8d9d1cc3687b7d7b))
+
+
+
 <a name="2.0.19"></a>
 ## [2.0.19](https://github.com/advanced-rest-client/raml-documentation-panel/compare/2.0.18...v2.0.19) (2017-07-04)
 
